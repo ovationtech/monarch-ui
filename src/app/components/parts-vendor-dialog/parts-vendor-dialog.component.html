@@ -1,0 +1,48 @@
+<div class="form-fields-container" mat-dialog-content >
+    <br>
+   <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>System Id</mat-label>
+        <input matInput formControlName="system_id" required>
+        <mat-error *ngIf="registerform.get('record_number?')?.hasError('required')">
+            system_id is required
+      </mat-error>
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Vendor Id</mat-label>
+        <input matInput formControlName="vendor_id" required>
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Vendor Name</mat-label>
+        <input matInput formControlName="vendor_long_name" required >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Vendor Address 1</mat-label>
+        <input matInput formControlName="vendor_address_1">
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>vendor_city</mat-label>
+        <input matInput formControlName="vendor_city" >
+      
+      </mat-form-field>
+
+    
+      <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" >Save</button>
+      </div>
+    
+    </form>
+</div>
+
+
+

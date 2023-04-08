@@ -1,0 +1,123 @@
+<div class="form-fields-container" mat-dialog-content >
+    <br>
+   <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Record Number</mat-label>
+        <input matInput formControlName="record_number" required>
+        <mat-error *ngIf="registerform.get('record_number?')?.hasError('required')">
+          Record Number is required
+      </mat-error>
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Equipment Id</mat-label>
+        <input matInput formControlName="equipment_id" >
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Sku Number</mat-label>
+        <input matInput formControlName="sku_number" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Manufacturer</mat-label>
+        <input matInput formControlName="manufacturer">
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Equip Type</mat-label>
+        <input matInput formControlName="equip_type_id" >
+      
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Model</mat-label>
+        <input matInput formControlName="model" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Oem</mat-label>
+        <input matInput formControlName="oem" >
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Serial Number</mat-label>
+        <input matInput formControlName="serial_number" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Customer Id</mat-label>
+        <input matInput formControlName="customer_id" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Location Id</mat-label>
+        <input matInput formControlName="location_id" >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Physical Location</mat-label>
+        <input matInput formControlName="physical_location" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Page Count</mat-label>
+        <input matInput formControlName="page_count" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contract Number</mat-label>
+        <input matInput formControlName="contract_number" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Start Date</mat-label>
+        <input matInput formControlName="start_date" >
+        
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Stop Date</mat-label>
+        <input matInput formControlName="stop_date" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="amount" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contract Note</mat-label>
+        <input matInput formControlName="cn_note" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Equipment Note</mat-label>
+        <input matInput formControlName="equip_note" >
+        
+      </mat-form-field>
+
+      <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+        <button mat-raised-button color="primary" style="margin-left: 5px;">Move Equip</button>
+        <button style="margin-left: 5px;" mat-raised-button color="primary" >Save</button>
+      </div>
+    
+    </form>
+</div>
+
+

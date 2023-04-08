@@ -1,0 +1,13 @@
+.scroll {
+    overflow-y: scroll;
+    max-height: 440px;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 0px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    // background-color: #000000;
+    border: none;
+}

@@ -1,0 +1,84 @@
+
+  
+
+  
+  .option {
+    cursor: pointer;
+  }
+
+  
+  .option.selected {
+    background-color: #eee;
+  }
+  
+  .option-data {
+    width: 75%;
+    margin-left: 20px;
+  }
+  
+  .table-link {
+    text-decoration: none;
+    color: #6068c0;
+    cursor: pointer;
+  }
+  .options {
+    height: 100%;
+    overflow-y: auto; /* add scrollbars if content overflows */
+  }
+ 
+  
+  .button-group .mat-button-toggle {
+    width: 1500px;
+    height: 80px;
+    line-height: 48px; /* center the text vertically */
+    font-size: 20px; 
+  }
+  
+  .mat-button-toggle-label-content {
+    font-size: 100px; /* set the desired font size */
+  }
+
+  app-component {
+    text-align: center;
+  }
+  
+  .my-div {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 80px;
+  }
+
+
+  .vertical-checkboxes .mat-checkbox {
+    margin-bottom: 90px; /* adjust the spacing as needed */
+  }
+  
+/*   .vertical-checkboxes .mat-checkbox-vertical {
+    display: flex;
+    flex-direction: row;
+  } */
+
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width:1500px;
+  }
+
+  .vertical-checkboxes {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-right: 16px;
+  }
+
+
+
+  

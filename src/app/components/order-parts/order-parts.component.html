@@ -1,0 +1,94 @@
+
+<div class="form-fields-container" mat-dialog-content >
+    <br>
+   <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Equip NO.</mat-label>
+        <input matInput formControlName="record_number" required>
+        <mat-error *ngIf="registerform.get('record_number?')?.hasError('required')">
+          Equip No is required
+      </mat-error>
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Config</mat-label>
+        <input matInput formControlName="equipment_id" >
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Equip ID</mat-label>
+        <input matInput formControlName="sku_number" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Serial</mat-label>
+        <input matInput formControlName="Serial">
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Page Count</mat-label>
+        <input matInput formControlName="page_count" >
+      
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Manu</mat-label>
+        <input matInput formControlName="manu" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Model</mat-label>
+        <input matInput formControlName="model" >
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Order Status</mat-label>
+        <input matInput formControlName="serial_number" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Qty</mat-label>
+        <input matInput formControlName="customer_id" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Part Number</mat-label>
+        <input matInput formControlName="location_id" >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Desc</mat-label>
+        <input matInput formControlName="physical_location" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>supplier</mat-label>
+        <input matInput formControlName="page_count" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Noter</mat-label>
+        <input matInput formControlName="contract_number" >
+        
+      </mat-form-field>
+
+      
+      <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" >Save</button>
+      </div>
+    
+    </form>
+</div>
+

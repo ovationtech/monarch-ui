@@ -1,0 +1,25 @@
+<mat-nav-list class="toggleSideNav">
+  <div *ngFor="let list of sideMenuItems" routerLinkActive="selected">
+    <mat-divider></mat-divider>
+    <span *ngIf="list.children !=0">
+      <span style="font-size: 15px; margin: 10px; font-weight: 500; color: #777;">{{list.name}}</span>
+      <mat-list-item *ngFor="let child of list?.children">
+        <button mat-button [routerLink]="child.path">{{child.name}}</button>
+      </mat-list-item>
+    </span>
+    <span *ngIf="list.children.length===0">
+      <button mat-button *ngIf="list.children" [routerLink]="list.path" class="menu-button" [routerLinkActive]="['is-active']">
+        <mat-icon>{{list.icon}}</mat-icon>
+        <span>{{list.name}}</span>
+      </button>
+    </span>
+  </div>
+
+
+    <!-- <mat-list-item appAccordionLink *ngFor="let list of sideMenuItems" routerLinkActive="selected">
+        <button mat-button [routerLink]="list.path" class="menu-button" [routerLinkActive]="['is-active']">
+            <mat-icon>{{list.icon}}</mat-icon>
+            <span>{{list.name}}</span>
+        </button>
+    </mat-list-item> -->
+</mat-nav-list>

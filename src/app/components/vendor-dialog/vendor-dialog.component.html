@@ -1,0 +1,135 @@
+
+<div class="form-fields-container" mat-dialog-content >
+  <br>
+ <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+  <mat-form-field appearance="fill" class="full-width" style="margin-right: 20px;">
+      <mat-label>Id/Name</mat-label>
+      <input matInput formControlName="vendor_id" >
+      <mat-error *ngIf="registerform.get('vendor_id')?.hasError('required')">
+        Vendor Id Required
+    </mat-error>
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="vendor_name" >
+    </mat-form-field>
+    <br>
+
+  <mat-form-field appearance="fill" class="full-width" style="margin-left: 230px;">
+      <mat-label>Check Name</mat-label>
+      <input matInput formControlName="vendor_check_name" >
+      <mat-error *ngIf="registerform.get('vendor_address_1')?.hasError('required')">
+        Check Name Required
+    </mat-error>
+    </mat-form-field>
+    <br>
+  <mat-form-field appearance="fill" class="full-width" style="margin-left: 230px;">
+      <mat-label>Short Name</mat-label>
+      <input matInput formControlName="vendor_short_name" required>
+      <mat-error *ngIf="registerform.get('vendor_short_name')?.hasError('required')">
+          Short name is required
+    </mat-error>
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width" style="margin-left: 30px;">
+      <mat-label>Record</mat-label>
+      <input matInput formControlName="id" >
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contact</mat-label>
+      <input matInput formControlName="vendor_contact" >
+    </mat-form-field>
+    <br>
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Address 1</mat-label>
+      <input matInput formControlName="vendor_address_1" >
+    </mat-form-field>
+    <mat-checkbox formControlName="e">External Work Order Management</mat-checkbox>
+  <mat-form-field appearance="fill" class="full-width" style="margin-left: 230px;">
+      <mat-label>EOM Process ID</mat-label>
+      <input matInput formControlName="vendor_eom" >
+    </mat-form-field>
+  <mat-form-field appearance="fill" class="full-width" style="margin-left: 230px;" >
+      <mat-label>Data A</mat-label>
+      <input matInput formControlName="vendor_eom_data_1" >
+    </mat-form-field>
+  <mat-form-field appearance="fill" class="full-width" >
+      <mat-label>Data B</mat-label>
+      <input matInput formControlName="vendor_eom_data_2"  style="margin-right: 30px;">
+    </mat-form-field>
+    <br>
+  <mat-form-field appearance="fill" class="full-width" >
+      <mat-label>Address 2</mat-label>
+      <input matInput formControlName="vendor_address_2" >
+    </mat-form-field>
+    <br>
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>City</mat-label>
+      <input matInput formControlName="vendor_city" >
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width" style="margin-left: 30px;">
+      <mat-label>State</mat-label>
+      <input matInput formControlName="vendor_state" >
+    </mat-form-field>
+
+    <br>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Zip</mat-label>
+      <input matInput formControlName="vendor_zip" >
+  
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width" style="margin-left: 30px;">
+      <mat-label>Country</mat-label>
+      <input matInput formControlName="vendor_country" >
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Phone 1</mat-label>
+      <input matInput formControlName="vendor_phone_1" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width" style="margin-left: 30px;">
+      <mat-label>Phone 2</mat-label>
+      <input matInput formControlName="vendor_phone_2" >
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="full-width" >
+      <mat-label>Fax</mat-label>
+      <input matInput formControlName="vendor_fax" >
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="full-width" >
+      <mat-label>Tax Sched</mat-label>
+      <input matInput formControlName="vendor_tax_sched" >
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="full-width" >
+      <mat-label>Terms</mat-label>
+      <input matInput formControlName="vendor_terms" >
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Comment 1</mat-label>
+      <textarea matInput formControlName="vendor_comment_1" ></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Comment 2</mat-label>
+      <textarea matInput formControlName="vendor_comment_2" ></textarea>
+    </mat-form-field>
+
+    <div mat-dialog-action [align]="'end'">
+      <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+      <button  style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Delete</button>
+      <button style="margin-left: 8px;" mat-raised-button color="primary" >Save</button>
+    </div>
+  
+  </form>
+</div>
+

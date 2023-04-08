@@ -1,0 +1,338 @@
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="serviceCallForm">
+       <!--  <mat-form-field>
+            <input matInput placeholder="Call Number" name="call_number" formControlName="call_number">
+        </mat-form-field> -->
+
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description" formControlName="service_description">
+        </mat-form-field>
+
+        <!-- <mat-form-field>
+            <mat-label>Customer</mat-label>
+            <mat-select name="customer" formControlName="customer">
+                <mat-option value="customer1">Customer 1</mat-option>
+                <mat-option value="customer2">Customer 2</mat-option>
+                <mat-option value="customer3">Customer 3</mat-option>
+            </mat-select>
+        </mat-form-field> -->
+       <!--  <mat-form-field>
+        <mat-label>Customers</mat-label>
+        <mat-select formControlName="customer_id"  (selectionChange)="onCustomerChange()" >
+            <mat-option *ngFor="let customer of customers" [value]="customer.customer_id">{{customer.customer_name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="serviceCallForm.get('customer_id')?.hasError('required')">
+            customer is required
+        </mat-error>
+        </mat-form-field> -->
+      <!--   <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Cust</mat-label>
+            <input matInput formControlName="customer_id" [matAutocomplete]="auto" required (input)="onInput($event)"(selectionchange)="onCustomerChange()">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let cust of filteredCustomer" [value]="cust.customer_id">
+                {{ cust.customer_name}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="serviceCallForm.get('customer_id')?.hasError('required')">
+                Customer is required
+            </mat-error>
+            </mat-form-field> -->
+
+           <!--  <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Cust</mat-label>
+                <input matInput formControlName="customer_id" [matAutocomplete]="auto" [displayWith]="displayCustomerName" required (input)="onInput($event)" >
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCustomerChange()">
+                    <mat-option *ngFor="let cust of filteredCustomer" [value]="cust.customer_id">
+                        {{ cust.customer_name }}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="serviceCallForm.get('customer_id')?.hasError('required')">
+                    Customer is required
+                </mat-error>
+            </mat-form-field> -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Customer</mat-label>
+                <input matInput formControlName="customer_id" [matAutocomplete]="auto" required (input)="onInput($event)"(click)="showOptions()">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCustomerChange()">
+                  <ng-container *ngFor="let cust of filteredCustomer">
+                    <mat-option [value]="cust.customer_id">
+                      {{ cust.customer_name }}
+                     
+                    </mat-option>
+                  </ng-container>
+                </mat-autocomplete>
+                <mat-error *ngIf="serviceCallForm.get('customer_id')?.hasError('required')">
+                  Customer is required
+                </mat-error>
+            </mat-form-field>
+              
+            
+
+
+        
+        <mat-form-field>
+            <mat-label>Location</mat-label>
+            <mat-select name="location" formControlName="location_id">
+              <mat-option *ngFor="let location of locations" [value]="location.id">{{ location.city}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" formControlName="address">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contact</mat-label>
+            <input matInput placeholder="Contact" formControlName="contact_name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Phone</mat-label>
+            <input matInput placeholder="Phone" formControlName="contact_phone">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>E mail</mat-label>
+            <input matInput placeholder="Email" formControlName="contact_email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Call Date</mat-label>
+            <input matInput [matDatepicker]="picker" name="call_date" formControlName="call_date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Call Type</mat-label>
+            <mat-select name="call_type" formControlName="type_call_short">
+                <mat-option value = "ANNUAL SERVICE">ANNUAL SERVICE</mat-option>
+                <mat-option value = "BILL LABOR ONLY">BILL LABOR ONLY</mat-option>
+                <mat-option value = "BILL PARTS ONLY">BILL PARTS ONLY</mat-option>
+                <mat-option value = "CANCELLED">CANCELLED</mat-option>
+                <mat-option value = "CONTRACT BILLABLE">CONTRACT BILLABLE</mat-option>
+                <mat-option value = "EMERGENCY">EMERGENCY</mat-option>
+                <mat-option value = "GENERATED MAINT">GENERATED MAINT</mat-option>
+                <mat-option value = "INSTALLATION">INSTALLATION</mat-option>
+                <mat-option value = "MAINTENANCE">MAINTENANCE</mat-option>
+                <mat-option value = "MPS">MPS</mat-option>
+                <mat-option value = "NON-BILLABLE">NON-BILLABLE</mat-option>
+                <mat-option value = "PENDING">PENDING</mat-option>
+                <mat-option value = "PREVENTATIVE">PREVENTATIVE</mat-option>
+                <mat-option value = "PROJECT">PROJECT</mat-option>
+                <mat-option value = "PROJECT-A">PROJECT-A</mat-option>
+                <mat-option value = "PROJECT-I">PROJECT-I</mat-option>
+                <mat-option value = "SARN WARRANTY">SARN WARRANTY</mat-option>
+                <mat-option value = "SUB-CONTRACT">SUB-CONTRACT</mat-option>
+                <mat-option value = "TESTING">TESTING</mat-option>
+                <mat-option value = "TIME & MATERIAL">TIME & MATERIAL</mat-option>
+                <mat-option value = "TIME & MATERIAL MC">TIME & MATERIAL MC</mat-option>
+                <mat-option value = "TIME & MATERIAL P1">TIME & MATERIAL P1</mat-option>
+                <mat-option value = "WARRANTY">WARRANTY</mat-option>
+                
+            </mat-select>
+        </mat-form-field>
+     <!--    <mat-form-field>
+            <mat-label>Equip </mat-label>
+            <mat-select formControlName="eq_master_id"  >
+                <mat-option *ngFor="let eq of equipment" [value]="eq.id">{{eq.serial_number}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="serviceCallForm.get('eq_master_id')?.hasError('required')">
+                equipment is required
+            </mat-error>
+        </mat-form-field> -->
+        <!-- <mat-form-field appearance="fill" class="full-width">
+            <mat-label>EquipId</mat-label>
+            <input matInput formControlName="eq_master_id" [matAutocomplete]="auto" required (input)="onEnput($event)" (click)="showequipOptions()">
+            <mat-autocomplete #auto="matAutocomplete">
+              <ng-container *ngFor="let eq of filteredEquipment ">
+                <mat-option [value]="eq.id">
+                  {{ eq.serial_number }}
+                 
+                </mat-option>
+              </ng-container>
+            </mat-autocomplete>
+            <mat-error *ngIf="serviceCallForm.get('eq_master_id')?.hasError('required')">
+              eq is required
+            </mat-error>
+        </mat-form-field> -->
+
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Equip Serial No.</mat-label>
+            <input matInput formControlName="eq_master_id" [matAutocomplete]="eqAuto" required (input)="onEnput($event)"(click)="showOptionsssss()" >
+            <mat-autocomplete #eqAuto="matAutocomplete" (optionSelected)="selectEquip()">
+              <ng-container *ngFor="let eq of filteredEquipment">
+                <mat-option [value]="eq.id">
+                  {{ eq.serial_number }}
+                 
+                </mat-option>
+                
+              </ng-container>
+            </mat-autocomplete>
+            <mat-error *ngIf="serviceCallForm.get('eq_master_id')?.hasError('required')">
+              Customer is required
+            </mat-error>
+        </mat-form-field>
+
+
+
+       <!--  <mat-form-field>
+            <mat-label>Equip </mat-label>
+            <mat-select formControlName="eq_master_id" placeholder="search customer">
+                <mat-select-filter [placeholder]="'Filter'" [displayMember]="'customer_name'" [array]="equipment" (filteredReturn)="filteredList5 =$event"></mat-select-filter>
+                <mat-option *ngFor="let item of filteredList5" [value]="item.id">
+                    {{item.serial_number}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+        
+        <mat-form-field>
+            <mat-label>Owner</mat-label>
+            <mat-select formControlName="call_owner"  >
+                <mat-option *ngFor="let user of allUsers " [value]="user.id">{{user.username}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="serviceCallForm.get('owner')?.hasError('required')">
+                Owner is required
+            </mat-error>
+        </mat-form-field>
+        
+
+        <mat-form-field>
+            <mat-label>Priority</mat-label>
+            <mat-select name="priority" formControlName="priority">
+                <mat-option value="4hours">4 hours</mat-option>
+                <mat-option value="critical">Critical</mat-option>
+                <mat-option value="escalated">Escalated</mat-option>
+                <mat-option value="normal">Normal</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Customer ref no.</mat-label>
+            <input matInput placeholder="Customer Ref No." name="cust_ref_no" formControlName="cust_ref_no">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Customer PO</mat-label>
+            <input matInput placeholder="Customer PO" formControlName="purchase_order">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Customer Call ID</mat-label>
+            <input matInput placeholder="Customer Call ID"  formControlName="customer_call_id">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>HP Work Order</mat-label>
+            <input matInput placeholder="HP Work Order"  formControlName="HP_Work_Order">
+        </mat-form-field>
+
+       
+        <mat-form-field>
+            <mat-label>Invoice</mat-label>
+            <input matInput placeholder="invoice" name="customer_po" formControlName="invoice">
+        </mat-form-field>
+
+ 
+        <mat-form-field>
+            <mat-label>Technician</mat-label>
+            <mat-select formControlName="technician_id" >
+                <mat-option *ngFor="let t of techi " [value]="t.id">{{t.tech_long_name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="serviceCallForm.get('technician')?.hasError('required')">
+                Technician is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label >Call Status</mat-label>
+            <mat-select formControlName="status_of_call">
+                <mat-option value="audit">AUDIT</mat-option>
+                <mat-option value="closed">CLOSED</mat-option>
+                <mat-option value="inItialize">INITIALIZE</mat-option>
+                <mat-option value="Open Calls">OPEN</mat-option>
+                <mat-option value="pending">PENDING</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Service Date</mat-label>
+            <input matInput [matDatepicker]="ticker" formControlName="date_of_service_call">
+            <mat-datepicker-toggle matSuffix [for]="ticker"></mat-datepicker-toggle>
+            <mat-datepicker #ticker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label >Initial Alarm</mat-label>
+            <mat-select name="initial_alarm" formControlName="initial_alarm">
+                <mat-option value="1 hour">1 Hour</mat-option>
+                <mat-option value="2hour">2 Hour</mat-option>
+                <mat-option value="inItialize">3 Hour</mat-option>
+                <mat-option value="open">4 Hour</mat-option>
+                <mat-option value="pending">5 Hour</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        
+        <mat-form-field>
+            <mat-label >Initial Appt Status</mat-label>
+            <mat-select name="tech_support" formControlName="appointment_status">
+                <mat-option value="AUDIT">AUDIT</mat-option>
+                <mat-option value="CANCELLED">CANCELLED</mat-option>
+                <mat-option value="CLOSED">CLOSED</mat-option>
+                <mat-option value="COMPLETE">COMPLETE</mat-option>
+                <mat-option value="CUST RESPONSE">CUST RESPONSE</mat-option>
+                <mat-option value="DEFAULT">DEFAULT</mat-option>
+                <mat-option value="DISPATCHED">DISPATCHED</mat-option>
+                <mat-option value="FIXED">FIXED</mat-option>
+                <mat-option value="IN ROUTE">IN ROUTE</mat-option>
+                <mat-option value="LMS RESPONSE">LMS RESPONSE</mat-option>
+                <mat-option value="PARTS ORDER">PARTS ORDER</mat-option>
+                <mat-option value="PARTS TRACK">PARTS TRACK</mat-option>
+                <mat-option value="PENDING">PENDING</mat-option>
+                <mat-option value="QUOTE">QUOTE</mat-option>
+                <mat-option value="RE-ASSIGN">RE-ASSIGN</mat-option>
+                <mat-option value="SARN RESPONSE">SARN RESPONSE</mat-option>
+                <mat-option value="SEND FSR">SEND FSR</mat-option>
+                <mat-option value="SEND TECH">SEND TECH</mat-option>
+                <mat-option value="SHOP REPAIR">SHOP REPAIR</mat-option>
+                <mat-option value="TECH REVIEW">TECH REVIEW</mat-option>
+                <mat-option value="TECH SUPPORT">TECH SUPPORT</mat-option>
+                <mat-option value="UNASSIGNED">UNASSIGNED</mat-option>
+                <mat-option value="UPDATE">UPDATE</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width: 400px;">
+            <mat-label >Special Notes</mat-label>
+
+            <textarea matInput placeholder="Enter your text here" rows="3" formControlName="special_notes"></textarea>
+        </mat-form-field >
+        <mat-form-field style="width: 400px;">
+            <mat-label>Location Notes</mat-label>
+
+            <textarea matInput rows="3" formControlName="location_notes" #locationNotesTextarea readonly></textarea>
+        </mat-form-field>
+       
+        <mat-form-field style="width: 400px;">
+            <mat-label>Equipment Notes</mat-label>
+
+            <textarea matInput rows="3" formControlName="equipment_notes" #equipmentNotesTextarea readonly></textarea>
+        </mat-form-field>
+        <mat-form-field style="width: 400px;">
+            <mat-label>Contract Notes</mat-label>
+
+            <textarea matInput  rows="3" formControlName="contract_notes" readonly></textarea>
+        </mat-form-field>
+        <mat-checkbox formControlName="tag">Tag</mat-checkbox>
+        <mat-checkbox formControlName="tech_support">Tech Support</mat-checkbox>
+        <mat-checkbox formControlName="logistic">Logistics</mat-checkbox>
+        <!-- <mat-checkbox formControlName="audit_entire_call">Audit Entire Call</mat-checkbox> -->
+        
+
+
+    </form>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="onSubmit()">Save Service Call</button>
+</mat-dialog-actions>

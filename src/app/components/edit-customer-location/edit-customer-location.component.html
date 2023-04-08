@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Add New Location</h2>
+<div mat-dialog-content>
+    <form [formGroup]="locationeditForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <input matInput formControlName="location_id" placeholder="Primary Address ID">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="address1" placeholder="Address 1" autocomplete="on">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="address2" placeholder="Address 2">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="city" placeholder="City">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="zip" placeholder="Zip">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="state" placeholder="State">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="country" placeholder="Country">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="contactName" placeholder="Contact Name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="phone1" placeholder="Contact Phone 1">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="phone2" placeholder="Contact Phone 2">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="fax" placeholder="Contact Fax">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="cntcprsn" placeholder="Term">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="shipping_account_number" placeholder="Shipping Account Number">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Sales Rep</mat-label>
+            <mat-select formControlName="salesRep">
+                <mat-option value="option1">option1</mat-option>
+                <mat-option value="option2">option2</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-checkbox formControlName="do_not_use">Do not use location</mat-checkbox>
+        <mat-checkbox formControlName="hold_for_address_1">On hold</mat-checkbox>
+        <mat-checkbox formControlName="isactive">Inactive</mat-checkbox>
+        <mat-checkbox formControlName="receiveEdiCalls">Receive EDI calls</mat-checkbox>
+        <mat-checkbox formControlName="enableEdiUpdates">Enable EDI Updates</mat-checkbox>
+
+        <div mat-dialog-actions>
+
+            <button type="button" mat-button (click)="close()">Close</button>
+
+            <button type="submit" mat-button color="primary">Submit</button>
+        </div>
+        <button type="button" mat-raised-button color="primary" (click)="openDialog(data)" >Contract</button>
+
+    </form>
+</div>

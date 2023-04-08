@@ -1,0 +1,133 @@
+
+<div class="mainContent">
+    <br>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="filter" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <mat-progress-bar *ngIf="!isProgress" mode="indeterminate"></mat-progress-bar>
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container *ngFor="let disCol of data.key; let colIndex = index;" matColumnDef="{{data.key[colIndex]}}">
+                <th class="header" mat-header-cell *matHeaderCellDef mat-sort-header floatLabel="never">
+                    {{ data.name[colIndex]|uppercase }}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <div *ngIf="data.link[colIndex]  === data.key[colIndex]">
+                        <a (click)="openDialog(element)" class="table-link">
+                            <span class="badge">{{ element[disCol] }}</span>
+                        </a>
+                    </div>
+                    <div *ngIf="data.link[colIndex]  != data.key[colIndex]">
+                        <span *ngIf="data.key[colIndex]  != 'alarm_value'" class="badge">{{ element[disCol] }}</span>
+                        <span *ngIf="data.key[colIndex]  === 'alarm_value'" class="badge">{{ element[disCol] | date:'MM/dd/yyyy hh:mm a' }}</span>
+                    </div>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="data.key"></tr>
+            <tr mat-row *matRowDef="let row; columns: data.key;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+
+   
+    
+
+    <div class="form-fields-container" mat-dialog-content >
+        <br>
+       <form class="example-form" [formGroup]="registerform">
+    <mat-form-field>
+        <mat-label style="width: 10px;">set For</mat-label>
+        <mat-select formControlName="set_for">
+            <mat-option value="accounting">Accounting</mat-option>
+            <mat-option value="administration">administration</mat-option>
+            <mat-option value="Billing">Billing</mat-option>
+            <mat-option value="IT Dept">IT Dept</mat-option>
+            <mat-option value="Logistics">Logistics</mat-option>
+            <mat-option value="Management">Management</mat-option>
+            <mat-option value="Parts">Parts</mat-option>
+            <mat-option value="Parts System">Parts System</mat-option>
+            <mat-option value="SAM Team">SAM Team</mat-option>
+            <mat-option value="TAG Team">TAG Team</mat-option>
+            <mat-option value="TECH Support">TECH Support</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Alarm Reason</mat-label>
+        <input matInput formControlName="alarm_reason" required>
+       
+      </mat-form-field>
+
+     <!-- <input type="date" formControlName="date"/>
+     
+     <input type="time" formControlName="time"/> -->
+
+      <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="ticker" formControlName="date">
+        
+        <mat-datepicker-toggle matSuffix [for]="ticker"></mat-datepicker-toggle>
+        <mat-datepicker #ticker></mat-datepicker>
+        
+    </mat-form-field>
+
+    <h3>Time</h3>
+      
+        <input [ngxTimepicker]="picker" formControlName="time"/>
+        <ngx-material-timepicker #picker></ngx-material-timepicker>
+    
+    
+    <!-- <input type="datetime-local" formControlName="alarm_value"> -->
+
+    
+      
+     
+
+    <mat-checkbox formControlName="do_not_use">Cancel Alarm</mat-checkbox>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Cancel Reason</mat-label>
+        <input matInput formControlName="cancel_reason">
+       
+      </mat-form-field>
+
+
+    
+     <br>
+    <button mat-raised-button color="accent" (click)="proceedregister()">
+        <mat-icon fontIcon="add"></mat-icon>
+        New Alarm</button>
+     <br>
+
+     <!-- <div mat-dialog-action [align]="'right'">
+        
+        <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+        <button style="margin: 30px;" mat-raised-button color="primary" >Save</button>
+
+     </div> -->
+
+     <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" >Save</button>
+      </div>
+       <br>
+
+       <br>
+       <br>
+       <br>
+</form>
+</div>
+      

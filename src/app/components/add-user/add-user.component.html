@@ -1,0 +1,113 @@
+
+   <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()" >
+    <!-- <button mat-button (click)="goBack()">Back</button> -->
+
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>User Name</mat-label>
+        <input matInput formControlName="username" required>
+        <mat-error *ngIf="addUserForm.get('username?')?.hasError('required')">
+            Username is required
+        </mat-error>
+        </mat-form-field>
+    
+       
+    
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="addUserForm.get('email')?.hasError('required')">
+            Email is required
+        </mat-error>
+        <mat-error *ngIf="addUserForm.get('email')?.hasError('email')">
+            Please enter a valid email address
+        </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" *ngIf="!data.id" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('required')">
+            Password is required
+        </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Access Level</mat-label>
+        <mat-select formControlName="access_level" required>
+            <mat-option value="Noacess">No Acess</mat-option>
+            <mat-option value="Viewonly">View Only</mat-option>
+            <mat-option value="Updateonly">Update Only</mat-option>
+            <mat-option value="Readwrite">Read/Write</mat-option>
+            <mat-option value="Customize">Customize</mat-option>
+            <mat-option value="Administrator">Administrator</mat-option>
+        </mat-select>
+        <mat-error *ngIf="addUserForm.get('access_level')?.hasError('required')">
+            Access Level is required
+        </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Supervisor</mat-label>
+        <input matInput formControlName="supervisor" [matAutocomplete]="auto" required (input)="onInput($event)"(click)="showOptions()">
+        <mat-autocomplete #auto="matAutocomplete"  >
+            <mat-option  *ngFor="let user of filteredUsers" [value]="user.username">
+            {{ user.username}}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="addUserForm.get('supervisor')?.hasError('required')">
+            Supervisor is required
+        </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Group/Team</mat-label>
+            <mat-select formControlName="user_group" required>
+            <mat-option value="Accounting">Accounting</mat-option>
+            <mat-option value="Administration">Administration</mat-option>
+            <mat-option value="Billing">Billing</mat-option>
+            <mat-option value="IT Dept">IT Dept</mat-option>
+            <mat-option value="Management">Management</mat-option>
+            <mat-option value="Parts System">Parts System</mat-option>
+            <mat-option value="Parts">Parts</mat-option>
+            <mat-option value="SAM Team">SAM Team</mat-option>
+            <mat-option value="Tag Team">Tag Team</mat-option>
+            <mat-option value="Tech Support">Tech Support</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addUserForm.get('user_group')?.hasError('required')">
+                Role Assignment is required
+            </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Select Default Msg</mat-label>
+                <mat-select formControlName="def_msg_type">
+                  <mat-option *ngFor="let msgType of msgTypes" [value]="msgType.value">
+                    {{msgType.viewValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="addUserForm.get('def_msg_type')?.hasError('required')">
+                    Default message is required
+                </mat-error>
+                </mat-form-field>
+    
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Role Assignment</mat-label>
+        <mat-select formControlName="role_id" required multiple>
+            <mat-option *ngFor="let role of userRoles" [value]="role.id">{{role.role}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="addUserForm.get('role_id')?.hasError('required')">
+            Role Assignment is required
+        </mat-error>
+        </mat-form-field>
+    
+        <div class="checkbox-group">
+        <mat-checkbox formControlName="sarn_board">SARN Board</mat-checkbox>
+        <mat-checkbox formControlName="ts_board">Tech Support Board</mat-checkbox><br>
+        <mat-checkbox formControlName="tag_board">Tag board</mat-checkbox>
+        <mat-checkbox formControlName="log_board">Logistic Board</mat-checkbox><br>
+        <mat-checkbox formControlName="alarm_owner_flg">Alarm Owner</mat-checkbox>
+        <mat-checkbox formControlName="isactive">Actice</mat-checkbox>
+        </div>
+
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+
+  </form>
+

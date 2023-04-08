@@ -1,0 +1,44 @@
+.example-container {
+    width: auto;
+    height: 100%;
+    border: 1px solid #555;
+}
+
+.toggleSideNav {
+    width: 230px;
+    margin-top: 65px;
+
+}
+
+.example-icon {
+    padding: 0 14px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.greeting {
+    font-size: 14px;
+    margin: 0;
+}
+
+.userName {
+    font-size: 16px;
+    margin: 0;
+    line-height: 10px;
+}
+
+.profileName {
+    padding: 10px;
+}
+
+.header {
+    // background-color: #ffffff;
+    position: fixed;
+    z-index: 2;
+    -webkit-box-shadow: 0px 10px 7px -6px rgba(217, 217, 217, 1);
+    -moz-box-shadow: 0px 10px 7px -6px rgba(217, 217, 217, 1);
+    box-shadow: 0px 10px 7px -6px rgba(217, 217, 217, 1);
+    width: 100%;
+  }

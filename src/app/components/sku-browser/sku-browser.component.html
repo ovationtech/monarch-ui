@@ -1,0 +1,78 @@
+<div class="mainContent">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>Equipment SKU Browser</mat-card-title>            
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+                <mat-radio-group style="display: flex; width: 100%;" [(ngModel)]="floatLabelControl">
+                    <div style="width: 260px; border: 1px solid rgba(117, 114, 114, 0.767); margin-right: 10px;">
+                        <mat-radio-button value="manufacturer">By Manufacturer</mat-radio-button>
+                        <br>                        
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>By Manufacturer</mat-label>
+                            <input matInput placeholder="Filter" autocomplete="off" (input)="onSearchMan($event)">
+                        </mat-form-field>
+                        <mat-divider></mat-divider>
+                        <mat-action-list class="scroll">
+                            <button mat-list-item *ngFor="let eq of eqManFilteredList" [id]="'man-'+eq.id" (click)="onEqManuClick($event, eq)">{{ eq.manufacturer }}</button>
+                        </mat-action-list>                       
+                    </div>
+                    
+                    <div style="width: 260px; border: 1px solid rgba(117, 114, 114, 0.767); margin-right: 10px;">
+                        <mat-radio-button value="equip_type_id">By Equip Type</mat-radio-button>
+                        <br>
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>By Equip Type</mat-label>
+                            <input matInput placeholder="By Equip Type" autocomplete="off"
+                                (input)="onSearchType($event)">
+                        </mat-form-field>
+                        <mat-divider></mat-divider>
+                        <mat-action-list class="scroll">
+                            <button mat-list-item  *ngFor="let eq of eqTypeFilteredList" [id]="'type-'+eq.id" (click)="onEqTypeClick($event, eq)">{{ eq.equip_type_id }}</button>
+                        </mat-action-list>                       
+                    </div>
+                    
+                    <div style="width: 260px; border: 1px solid rgba(117, 114, 114, 0.767); margin-right: 10px;">
+                        <mat-radio-button value="model">By Model</mat-radio-button>
+                        <br>
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>By Model</mat-label>
+                            <input matInput placeholder="By Model" autocomplete="off"
+                                (input)="onSearchModel($event)">
+                        </mat-form-field>
+                        <mat-divider></mat-divider>
+                        <mat-action-list class="scroll">
+                            <button mat-list-item  *ngFor="let eq of eqModelFilteredList" [id]="'model-'+eq.id" (click)="onModelClick($event, eq)">{{ eq.model }}</button>
+                        </mat-action-list>                       
+                    </div>
+                    
+                    <div style="width: 260px;">
+                        <button mat-raised-button color="primary" (click)="resetFilter()">Reset</button>
+                        <br>
+                        <br>
+                        <div *ngIf="skuNumner">
+                            <h3 style="margin-bottom: 0;">SKU Number</h3>
+                            <h1><b>{{skuNumner}}</b></h1>
+                        </div>
+                        <br>
+                        <br>                        
+                        <button mat-raised-button color="primary" >Edit SKU</button>
+                    </div>
+
+                </mat-radio-group>
+
+        </mat-card-content>
+    </mat-card>
+
+    <form>
+        <div>
+
+        </div>
+    </form>
+
+
+
+
+
+</div>

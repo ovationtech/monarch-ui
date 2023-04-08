@@ -1,0 +1,53 @@
+
+<button mat-raised-button color="accent" (click)=" openAddCustomer($event)">
+    <mat-icon>add</mat-icon>
+    Add Customer
+</button> 
+<mat-form-field appearance="fill">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="filter" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <mat-progress-bar *ngIf="!isProgress" mode="indeterminate"></mat-progress-bar>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      
+
+        <!-- Add new matColumnDef for edit button -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+               <!--  <button mat-icon-button  >
+                    <mat-icon>edit</mat-icon>
+                </button> -->
+            </td>
+        </ng-container>
+        <ng-container *ngFor="let disCol of data.key; let colIndex = index;" matColumnDef="{{data.key[colIndex]}}">
+            <th class="header" mat-header-cell *matHeaderCellDef mat-sort-header floatLabel="never">
+                {{ data.name[colIndex]|uppercase }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="data.link[colIndex]  === data.key[colIndex] ">
+                    <a (click)="openDialog(element)" class="table-link">
+                        <span class="badge">{{ element[disCol] }}</span>
+                    </a>
+                </div>
+                <div *ngIf="data.link[colIndex]  != data.key[colIndex] ">
+                    <span class="badge">{{ element[disCol] }}</span>
+                </div>
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="data.key.concat('edit')"></tr>
+        <tr mat-row *matRowDef="let row; columns: data.key.concat('edit')"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+

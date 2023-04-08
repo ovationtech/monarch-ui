@@ -1,0 +1,106 @@
+
+<div class="form-fields-container" mat-dialog-content >
+  <br>
+ <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>DropDown</mat-label>
+      
+      <mat-select formControlName="customer_id">
+          <mat-option value="option1">Customer Contract</mat-option>
+          <mat-option value="option1">Equipment</mat-option>
+          <mat-option value="option1">Service Call</mat-option>
+         
+      </mat-select>
+      
+    </mat-form-field>
+
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Customer ID</mat-label>
+      <input matInput formControlName="customer_id" >
+      
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Location ID</mat-label>
+      <input matInput formControlName="location_id" >
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Call Number</mat-label>
+      <input matInput formControlName="id" >
+      <mat-error *ngIf="registerform.get('id')?.hasError('required')">
+         ID Required
+    </mat-error>
+    </mat-form-field>
+    <button mat-raised-button style="margin-left: 8px;" color="primary" mat-dialog-close>Refresh</button>
+    <div class="form-fields-container" mat-dialog-content>
+
+      <mat-label>Customer Document</mat-label>
+      <br>
+      <br>
+      <table>
+          
+      <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" >
+        </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Document ID</mat-label>
+          <input matInput formControlName="document_id" >
+        </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Type</mat-label>
+          <input matInput formControlName="document_type" >
+        </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="document_description" >
+        </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Date</mat-label>
+          <input matInput formControlName="document_date" >
+        </mat-form-field>
+
+      </table>
+      
+      
+
+    </div>
+
+    <br>
+      <div mat-dialog-action [align]="'left'">
+         
+          <br>
+          <br>
+          <button  mat-raised-button color="primary"  >Browse</button>
+          
+          
+          <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Filepath</mat-label>
+          <input matInput formControlName="" >
+          
+      </mat-form-field>
+      <button  mat-raised-button color="primary" style="margin-left: 8px;" >Add file</button>
+      <br>
+          <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="" >
+          
+      </mat-form-field>
+      <button  mat-raised-button color="primary" style="margin-left: 8px;" >Reset</button>
+      </div>
+
+
+
+      <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+      
+
+  
+
+    
+  
+  </form>
+</div>
+

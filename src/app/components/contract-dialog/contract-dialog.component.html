@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>Location Contract</h2>
+<div mat-dialog-content>
+    <form [formGroup]="locationeditForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <mat-label>Customer ID</mat-label>
+            <input matInput formControlName="customer_id" placeholder="Customer ID">
+        </mat-form-field>
+        <mat-form-field style="margin-left: 30px;">
+            <mat-label>Customer Name</mat-label>
+            <input matInput  placeholder="Customer name">
+        </mat-form-field>
+        <br>
+       
+        <mat-form-field>
+            <mat-label>ID</mat-label>
+            <input matInput formControlName="location_id" placeholder="location ID">
+        </mat-form-field>
+       
+        <mat-form-field style="margin-left: 30px;">
+            <mat-label>Location Record</mat-label>
+            <input matInput formControlName="location_record" placeholder="Location record">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field>
+            <mat-label>Contact ID</mat-label>
+            <input matInput formControlName="contract_id" placeholder="contract ID" autocomplete="on">
+        </mat-form-field>
+
+        
+        <mat-checkbox formControlName="on_hold">On hold</mat-checkbox>
+        <mat-checkbox formControlName="isactive">Cancel</mat-checkbox>
+        <mat-checkbox formControlName="auto_bill">Auto Bill</mat-checkbox>
+       <br>
+
+        <mat-form-field>
+            <mat-label>Contract Type</mat-label>
+            <input matInput formControlName="contract_type" placeholder="contract_type">
+        </mat-form-field>
+        <mat-form-field style="margin-left: 30px;">
+            <mat-label>Cancel Reason</mat-label>
+            <input matInput formControlName="cancel_reason" placeholder="Cancel reason">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Contract Amount</mat-label>
+            <input matInput formControlName="contract_amount" placeholder="contract_amount">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose a  start date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="start_date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+        <mat-form-field style="margin-left: 30px;">
+            <mat-label>Billing Frequency</mat-label>
+            <input matInput formControlName="bill_freq" placeholder="bill_freq">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose a  Expire date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="stop_date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        <mat-form-field style="margin-left: 30px;">
+            <mat-label>PO Number</mat-label>
+            <input matInput formControlName="po_number" placeholder="po_number">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Anniversary</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="anniversary">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Tax Sched</mat-label>
+            <input matInput formControlName="tax_sched" placeholder="tax_sched">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Contract Note</mat-label>
+            <textarea matInput formControlName="master_note" placeholder="master_note" rows="10" ></textarea>
+        </mat-form-field>
+        
+
+        <div mat-dialog-actions >
+
+            <button type="button" mat-raised-button (click)="close()">Close</button>
+            <button type="button" mat-raised-button  color="primary">NEW</button>
+            <button type="button" mat-raised-button color="primary">Delete</button>
+            <button type="button" mat-raised-button color="primary" >Equipment</button>
+            <button type="button" mat-raised-button  color="primary">Service Hist</button>
+            <button type="button" mat-raised-button  color="primary">Renew</button>
+            <button type="button" mat-raised-button color="primary" >Inclusion</button>
+
+            <button type="submit" mat-raised-button color="primary">Save</button>
+        </div>
+       
+
+    </form>
+</div>

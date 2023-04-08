@@ -1,0 +1,650 @@
+
+      <!-- Import Angular Material modules in app.module.ts -->
+
+       <h2>Appointments</h2>
+       <button mat-raised-button color="accent"(click)="toggleForm()">Add New Appointment</button>
+     
+
+            <mat-form-field appearance="fill">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="filter" #input>
+            </mat-form-field>
+
+
+            <div class="mat-elevation-z8">
+                <mat-progress-bar *ngIf="!isProgress" mode="indeterminate"></mat-progress-bar>
+                <table mat-table [dataSource]="dataSource" matSort>
+                  
+                    <th class="header" mat-header-cell *matHeaderCellDef></th>
+                  
+                
+
+                    <ng-container *ngFor="let disCol of datas.key; let colIndex = index;" matColumnDef="{{datas.key[colIndex]}}">
+                        <th class="header" mat-header-cell *matHeaderCellDef mat-sort-header floatLabel="never">
+                            {{ datas.name[colIndex]|uppercase }}
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index;">
+                          <div *ngIf="datas.key[colIndex] === 'serial'">
+                            <span class="badge">{{ i + 1 }}</span>
+                          </div>
+                   
+                        
+                            <div *ngIf="datas.link[colIndex]  === datas.key[colIndex] ">
+                                <a  class="table-link">
+                                    <span class="badge">{{ element[disCol] }}</span>
+                                </a>
+                            </div>
+                         <!--    <div *ngIf="datas.link[colIndex]  != datas.key[colIndex] ">
+                                <span class="badge">{{ element[disCol] }}</span>
+                            </div> -->
+                            <div *ngIf="datas.link[colIndex]  != datas.key[colIndex] ">
+                              <span  *ngIf="datas.key[colIndex]  != 'added_on'" class="badge">{{ element[disCol] }}</span>
+                              <span  *ngIf="datas.key[colIndex]  === 'added_on'" class="badge">{{ element[disCol] | date:'MM/dd/yyyy' }}</span>
+                              <span  *ngIf="datas.key[colIndex]  === 'action'" class="badge">
+                                <button mat-raised-button style="margin-bottom: 10px;" color="accent" (click)="togglePartsform(element); $event.stopPropagation();" >
+                                  <mat-icon>devices_other</mat-icon>
+                                  Parts Management
+                                </button>
+                                <button mat-raised-button style="margin-bottom: 10px;" color="primary" (click)="toggleSlaTracker(element); $event.stopPropagation();" >
+                                  <mat-icon>chrome_reader_mode</mat-icon>
+                                  SLA Tracker
+                                </button>
+                                <button mat-raised-button style="margin-bottom: 10px;" color="success" (click)="toggleWorkOrderForm(element); $event.stopPropagation();" >
+                                  <mat-icon>assignment</mat-icon>
+                                  Work Order
+                                </button>
+                                  <button mat-raised-button color="warn" (click)="deleteAppointment(element)">
+                                      <mat-icon>delete</mat-icon>
+                                      Delete
+                                    </button>
+                              </span>
+                          </div>
+
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="datas.key"></tr>
+                    <tr mat-row *matRowDef="let row; columns: datas.key;" (click)="onRowClick(row)"[class.selected]="selectedRow === row"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              </div>
+             <br>
+             <br>
+              <div *ngIf="showForm">
+                <form [formGroup]="appointmentForm">
+                    <mat-form-field>
+                      <mat-label>Technician</mat-label>
+                      <mat-select formControlName="technician_id" >
+                          <mat-option *ngFor="let t of techi " [value]="t.id">{{t.tech_long_name}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="appointmentForm.get('technician')?.hasError('required')">
+                          Technician is required
+                      </mat-error>
+                  </mat-form-field>
+               
+                  
+                      <mat-form-field>
+                        <mat-label >Appt Status</mat-label>
+                        <mat-select name="tech_support" formControlName="appointment_status">
+                            <mat-option value="AUDIT">AUDIT</mat-option>
+                            <mat-option value="CANCELLED">CANCELLED</mat-option>
+                            <mat-option value="CLOSED">CLOSED</mat-option>
+                            <mat-option value="COMPLETE">COMPLETE</mat-option>
+                            <mat-option value="CUST RESPONSE">CUST RESPONSE</mat-option>
+                            <mat-option value="DEFAULT">DEFAULT</mat-option>
+                            <mat-option value="DISPATCHED">DISPATCHED</mat-option>
+                            <mat-option value="FIXED">FIXED</mat-option>
+                            <mat-option value="IN ROUTE">IN ROUTE</mat-option>
+                            <mat-option value="LMS RESPONSE">LMS RESPONSE</mat-option>
+                            <mat-option value="PARTS ORDER">PARTS ORDER</mat-option>
+                            <mat-option value="PARTS TRACK">PARTS TRACK</mat-option>
+                            <mat-option value="PENDING">PENDING</mat-option>
+                            <mat-option value="QUOTE">QUOTE</mat-option>
+                            <mat-option value="RE-ASSIGN">RE-ASSIGN</mat-option>
+                            <mat-option value="SARN RESPONSE">SARN RESPONSE</mat-option>
+                            <mat-option value="SEND FSR">SEND FSR</mat-option>
+                            <mat-option value="SEND TECH">SEND TECH</mat-option>
+                            <mat-option value="SHOP REPAIR">SHOP REPAIR</mat-option>
+                            <mat-option value="TECH REVIEW">TECH REVIEW</mat-option>
+                            <mat-option value="TECH SUPPORT">TECH SUPPORT</mat-option>
+                            <mat-option value="UNASSIGNED">UNASSIGNED</mat-option>
+                            <mat-option value="UPDATE">UPDATE</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker" placeholder="Service Date" formControlName="service_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                  
+                      
+                      <mat-form-field>
+                        <mat-label>Difficulty</mat-label>
+                        <mat-select name="priority" formControlName="difficulty">
+                            <mat-option value="1">1 </mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Onsite Rate</mat-label>
+                        <input matInput type="text" placeholder="Onsite Rate" formControlName="rate">
+                      </mat-form-field>
+                   <!--    <mat-form-field>
+                        <mat-label>Rate Type</mat-label>
+                        <mat-select  formControlName="rate_type">
+                            <mat-option value="1">1 </mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                      <mat-form-field>
+                        <mat-label>Travel Rate</mat-label>
+                          <mat-label>Travel Rate</mat-label>
+                        <input matInput type="text" placeholder="Travel Rate" formControlName="travelrate">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Rate Adjust</mat-label>
+                        <input matInput type="text" placeholder="Rate Adjust" formControlName="rate_adjust">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>onsite Rate Type</mat-label>
+                        <mat-select formControlName="rate_adjust_reason">
+                            <mat-option value="Pending">Pending</mat-option>
+                            <mat-option value="Pending">Pending</mat-option>
+                            <mat-option value="Pending">Pending</mat-option>
+                            <mat-option value="Pending">Pending</mat-option>
+                            <mat-option value="Pending">Pending</mat-option>
+
+
+                            
+                           
+                        </mat-select>
+                    </mat-form-field>  
+                      <mat-form-field>
+                        <mat-label>Page Count</mat-label>
+                        <input matInput type="number" placeholder="Page Count" formControlName="page_count">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="etaPicker" placeholder="ETA Date" formControlName="eta_date">
+                        <mat-datepicker-toggle matSuffix [for]="etaPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #etaPicker></mat-datepicker>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>ETA From</mat-label>
+                        <input matInput type="time" placeholder="ETA From" formControlName="eta_from">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>ETA To</mat-label>
+                        <input matInput type="time" placeholder="ETA To" formControlName="eta_to">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Onsite</mat-label>
+                        <input matInput type="time" placeholder="Onsite" formControlName="onsite_time">
+                      </mat-form-field>
+                   
+                      <mat-form-field>
+                          <mat-label>onsite Rate Type</mat-label>
+                          <mat-select formControlName="rate_type">
+                              <mat-option value="Pending">Pending</mat-option>
+                              <mat-option value="Flat">Flat</mat-option>
+                              <mat-option value="Hourly">Hourly</mat-option>
+                              <mat-option value="Sub-Contract">Sub-Contract</mat-option>
+                              <mat-option value="No">No Rate</mat-option>
+                              <mat-option value="Travel">Travel Only</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Offsite</mat-label>
+                        <input matInput type="time" placeholder="Offsite" formControlName="offsite_time">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Travel Miles</mat-label>
+                        <input matInput type="text" placeholder="Travel Miles" formControlName="travel_miles">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Travel Hrs</mat-label>
+                        <input matInput placeholder="Travel Hrs" formControlName="travel_hours">
+                      </mat-form-field>
+                     
+                      <mat-form-field style="width: 400px;">
+                        <mat-label>Appointment Notes</mat-label>
+                        <textarea matInput rows="3" formControlName="critical_note"  ></textarea>
+                      </mat-form-field>
+                      <br>
+                      <br>
+                      <br>
+                      <h3>Audit Notes</h3>
+                      <mat-form-field style="width: 400px;">
+                        <mat-label>Audit Notes</mat-label>
+                        <textarea matInput rows="3" formControlName="audit_note" #equipmentNotesTextarea ></textarea>
+                      </mat-form-field>
+                      <mat-checkbox formControlName="enable_audit">Enable Audit</mat-checkbox>
+                      <mat-form-field style="width: 400px;">
+                        <mat-label>Audit Resolution</mat-label>
+                        <textarea matInput rows="3" formControlName="audit_resolution_note"  ></textarea>
+                      </mat-form-field>
+                      <mat-checkbox formControlName="resolved_audit">Resolved Audit</mat-checkbox>
+
+                      <mat-form-field style="width: 400px;">
+                        <mat-label>Audit Resolved</mat-label>
+                        <textarea matInput rows="3" formControlName="audit_resolved"  ></textarea>
+                      </mat-form-field>
+                    
+                     
+                      <button mat-raised-button color="primary" (click)="onSubmit()"style="float: right;">{{ isUpdateMode ? 'Update Appointment' : 'Add Appointment' }}</button>
+
+                      
+                    
+                </form>
+              </div>
+              <br>
+              <br>
+              <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close>Cancel</button>
+              </mat-dialog-actions>
+
+              <div *ngIf="showWorkOrderForm">
+                <form [formGroup]="workOrderForm" >
+                  <h2>Work Order Form</h2>
+                  <mat-form-field>
+                    <mat-label>Representing</mat-label>
+                    <input matInput formControlName="representing">
+                  </mat-form-field>
+                
+                  <mat-checkbox formControlName="post_to_external_platform">Post to external platform</mat-checkbox>
+                
+                  <mat-form-field>
+                    <mat-label>Template</mat-label>
+                    <mat-select formControlName="eom_template">
+                      <mat-option value="template1">Template 1</mat-option>
+                      <mat-option value="template2">Template 2</mat-option>
+                      <mat-option value="template3">Template 3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                
+                  <mat-form-field>
+                    <mat-label>Process</mat-label>
+                    <mat-select formControlName="process">
+                      <mat-option value="process1">Process 1</mat-option>
+                      <mat-option value="process2">Process 2</mat-option>
+                      <mat-option value="process3">Process 3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                
+                  <mat-form-field>
+                    <mat-label>EOM Data 1</mat-label>
+                    <input matInput formControlName="eom_date_1">
+                  </mat-form-field>
+                
+                  <mat-form-field>
+                    <mat-label>EOM Data 2</mat-label>
+                    <input matInput formControlName="eom_date_2">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>ETA From Date</mat-label>
+                    <input matInput [matDatepicker]="aPicker" placeholder="ETA Date" formControlName="eta_from">
+                    <mat-datepicker-toggle matSuffix [for]="aPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #aPicker></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>From Time</mat-label>
+                    <input matInput type="time" placeholder="Offsite" formControlName="eta_time">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>ETA To  Date</mat-label>
+                    <input matInput [matDatepicker]="bPicker" placeholder="ETA Date" formControlName="eta_to">
+                    <mat-datepicker-toggle matSuffix [for]="bPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #bPicker></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>To Time</mat-label>
+                    <input matInput type="time" placeholder="Offsite" formControlName="eta_date">
+                  </mat-form-field>
+                  <mat-form-field style="width: 1000px; height: 600px;">
+                    <mat-label>Instructions</mat-label>
+                    <textarea matInput rows="3" formControlName="instructions"  ></textarea>
+                  </mat-form-field>
+
+                  <button mat-raised-button color="primary" style="float:bottom;"(click)="onSubmitWorkOrder()">Add Work Order</button>
+                 </form>
+                </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf="showPartsForm" (ngSubmit)="onSubmitSlaTracker()" class="my-div">
+             
+                <h1>PARTS FORM</h1>
+                <form [formGroup]="partsForm">
+                  <mat-form-field style="margin-right: 16px;">
+                    <mat-label>Stage</mat-label>
+                    <input matInput formControlName="stage" placeholder="Enter stage">
+                  </mat-form-field>
+                
+                  <mat-form-field>
+                    <mat-label>Order Status</mat-label>
+                    <input matInput formControlName="order_status" placeholder="Enter order status">
+                  </mat-form-field>
+                  <br>
+                  <br>
+                  <div class="vertical-checkboxes">
+                    <br><br>
+                  <mat-checkbox formControlName="order_is_ready">Order is Ready</mat-checkbox>
+                  <mat-checkbox formControlName="quote_is_ready">Quote is Ready</mat-checkbox>
+                  <mat-checkbox formControlName="shipping_is_ready">Shipping is Ready</mat-checkbox>
+                  <mat-checkbox formControlName="delivered">Delivered</mat-checkbox>
+                  <mat-checkbox formControlName="recovery_complete">Recovery Complete</mat-checkbox>
+                  <mat-checkbox formControlName="usage_complete">Usage Complete</mat-checkbox>
+                  <mat-checkbox formControlName="order_complete">Order Complete</mat-checkbox>
+
+                  <mat-form-field >
+                    <mat-label>Prepared By</mat-label>
+                    <input matInput formControlName="prepared_by" placeholder="enter here">
+                  </mat-form-field>
+                
+                 </div>
+                
+                  <div class="container">
+
+
+                  
+                  <mat-button-toggle-group vertical formControlName="button_toggle"class="button-group">
+                    <mat-button-toggle color="primary" value="create_temp_equipment" (click)="onButtonToggleChange('create_temp_equipment')">Create Temp Equipment</mat-button-toggle>
+                    <div *ngIf="isCreateTempEquipmentSelected">
+                      <h1>THIS IS TEMPLATE FOR TEMP EQUIPMENT</h1>
+                    </div>
+                    <mat-button-toggle color="primary" value="order_parts"(click)="onButtonToggleChange('parts_order')">Order Parts</mat-button-toggle>
+                    <div *ngIf="isOrderPartsSelected">
+                      <h1>THIS IS TEMPLATE For Parts Order</h1>
+                      <h2 mat-dialog-title>Order Part - CALL</h2>
+                      <div class="form-fields-container" mat-dialog-content >
+                          <br>
+                         <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+                      
+                          <!-- <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Equipment No</mat-label>
+                              <input matInput formControlName="id" >
+                              <mat-error *ngIf="registerform.get('id')?.hasError('required')">
+                                  Equipment No Required
+                              </mat-error>
+                              
+                            </mat-form-field> -->
+                      
+                          <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Config ID</mat-label>
+                              <input matInput formControlName="config_id" >
+                              <mat-error *ngIf="registerform.get('config_id')?.hasError('required')">
+                                  Config ID Required
+                              </mat-error>
+                              
+                             
+                            </mat-form-field>
+                      
+                          <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Equipment ID</mat-label>
+                              <input matInput formControlName="equipment_id" >
+                              <mat-error *ngIf="registerform.get('equipment_id')?.hasError('required')">
+                                  Equipment ID Required
+                            </mat-error>
+                              
+                              
+                            </mat-form-field>
+                      
+                          <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Serial</mat-label>
+                              <input matInput formControlName="serial_number" required>
+                              <mat-error *ngIf="registerform.get('serial_number')?.hasError('required')">
+                                Serial Number is required
+                              
+                            </mat-error>
+                            </mat-form-field>
+                      
+                          <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Page Count Required</mat-label>
+                              <input matInput formControlName="page_count_required" >
+                            
+                            </mat-form-field>
+                      
+                          <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Model</mat-label>
+                              <input matInput formControlName="model" >
+                              
+                            </mat-form-field>
+                      
+                          <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Manufacturer</mat-label>
+                              <input matInput formControlName="manufacturer" >
+                             
+                            </mat-form-field><br><br>
+                      
+                       <!--      <app-parts-dialog></app-parts-dialog> -->
+
+
+<!-- --------------------------------------------------------------------------- -->
+
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>Part Number</mat-label>
+  
+  <mat-select formControlName="part_number">
+      <mat-option value="1234">1234</mat-option>
+      <mat-option value="0999-2hy">0999-2hy</mat-option>
+      <mat-option value="0999-432hy">0999-432hy</mat-option>
+      <mat-option value="09sdfdshy">09sdfdshy</mat-option>
+      <mat-option value="099fdgfd32hy">099fdgfd32hy</mat-option>
+      <mat-option value="JHHGF9-432hy">JHHGF9-432hy</mat-option>
+      <mat-option value="0OIUHKFF-432hy">0OIUHKFF-432hy</mat-option>
+      <mat-option value="09JFNKJNFKJ32hy">09JFNKJNFKJ32hy</mat-option>
+      <mat-option value="09788979GHJGH32hy">09788979GHJGH32hy</mat-option>
+      <mat-option value="JHKJH67672hy">JHKJH67672hy</mat-option>
+      <mat-option value="099HHDFKD99782hy">099HHDFKD99782hy</mat-option>
+      <mat-option value="0GHjgjgh&3332hy">0GHjgjgh&3332hy</mat-option>
+      <mat-option value="0999-44323hy">0999-44323hy</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill" class="full-width">
+    <mat-label>PART NAME</mat-label>
+    <input matInput formControlName="part_name" >
+    
+  </mat-form-field>
+
+<mat-form-field appearance="fill" class="full-width">
+    <mat-label>PART TEMP FLAG</mat-label>
+    <input matInput formControlName="part_temp_flag" >
+  
+  </mat-form-field>
+
+<mat-form-field appearance="fill" class="full-width">
+    <mat-label>PART NOTE</mat-label>
+    <input matInput formControlName="part_note" >
+  
+  </mat-form-field>
+
+<mat-form-field appearance="fill" class="full-width">
+    <mat-label>PART NAME CHANGED FLAG</mat-label>
+    <input matInput formControlName="part_name_changed_flag" >
+    
+  </mat-form-field>
+
+<mat-form-field appearance="fill" class="full-width">
+    <mat-label>PREV PART NAME</mat-label>
+    <input matInput formControlName="prev_part_name" >
+    
+  </mat-form-field>
+
+  <br>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Supplier</mat-label>
+    
+    <mat-select formControlName="supplier">
+        <mat-option value="option1">LMS</mat-option>
+        <mat-option value="option1">Customer</mat-option>
+        <mat-option value="option2">Tech</mat-option>
+    </mat-select>
+    
+  </mat-form-field>
+
+  <mat-checkbox formControlName="recover">Recover</mat-checkbox>
+  <mat-checkbox formControlName="Ready">Order is Ready</mat-checkbox>
+  <mat-checkbox formControlName="Quote">Quote</mat-checkbox>
+  <button style="margin-left: 8px;" mat-raised-button color="accent" mat-dialog-close>Set Ready</button>
+
+  <mat-divider></mat-divider>
+
+  <br>
+  <div mat-dialog-action [align]="'end'">
+    <button style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+    <button  style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Delete Part</button>
+    <button style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Delete Order</button>
+    <button style="margin-left: 8px;" mat-raised-button color="primary" >Add Part</button>
+  </div>
+
+                      
+                            
+                          
+                          </form>
+                      <!--     <app-parts></app-parts> -->
+                          
+                      </div>
+                      
+                      
+                      <!-- <app-edit-parts-order-dialog [SSSSdata]="SSSSdata"></app-edit-parts-order-dialog> -->
+                      <!-- <app-customers></app-customers> -->
+                    </div>
+                    <mat-button-toggle color="primary" value="price_quotes">Price Quotes</mat-button-toggle>
+                    <mat-button-toggle color="primary" value="select_shipping_and_submit">Select Shipping and Submit</mat-button-toggle>
+                    <mat-button-toggle color="primary" value="parts_tracking_usage">Parts Tracking/Usage</mat-button-toggle>
+                  </mat-button-toggle-group>
+                  <br>
+                 
+                  
+                  
+                </div>
+                </form>
+                
+                
+            </div>
+            <br>
+            <br>
+
+            <div *ngIf="showSlaTracker" (ngSubmit)="onSubmitSlaTracker()">
+             
+              <h1>SLA TRACKER</h1>
+              <form [formGroup]="slaTrackerForm">
+                <mat-form-field>
+                  <mat-label>Technician Name</mat-label>
+                  <input matInput  placeholder="Offsite" formControlName="technician_id" readonly>
+                </mat-form-field>
+                <br><br>
+            <!--     <mat-form-field>
+                  <mat-label>Onsit Date</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="onsite_date" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field> -->
+                <mat-form-field>
+                  <mat-label>Date</mat-label>
+                  <input matInput [matDatepicker]="pickera" formControlName="onsite_date" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="pickera"></mat-datepicker-toggle>
+                  <mat-datepicker #pickera></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Tech Onsite Time</mat-label>
+                  <input matInput type="time" placeholder="onsite" formControlName="onsite_time" >
+                </mat-form-field>
+                <mat-form-field>
+                  
+                    <mat-label>Onsite Note</mat-label>
+                    <input matInput placeholder="sla" formControlName="sla_1">
+                </mat-form-field>
+                 
+                 
+                  <br><br>
+                  <mat-form-field>
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="offsite_date" placeholder="Choose a date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Tech Offsite</mat-label>
+                  <input matInput type="time" placeholder="Offsite" formControlName="offsite_time">
+                </mat-form-field>
+                <mat-form-field>
+                <mat-label>Offsite Note</mat-label>
+                <input matInput placeholder="offsite note" formControlName="sla_2">
+               </mat-form-field>
+              
+                <button mat-raised-button color="primary" style="float:bottom;"(click)="onSubmitSlaTracker()">Add sla tracker</button>
+              
+              
+                <!-- <mat-form-field>
+                  <mat-label>Time</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <input matInput [ngxTimepicker]="picker" formControlName="time" placeholder="Choose a time">
+                  <ngx-material-timepicker #picker></ngx-material-timepicker>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field > -->
+              </form>
+              
+          </div>
+          <br>
+          <br>
+            <h2>Appointment logs</h2>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFiltern($event)" placeholder="filter" #input>
+            </mat-form-field>
+
+
+            <div class="mat-elevation-z8">
+                <mat-progress-bar *ngIf="!isProgress" mode="indeterminate"></mat-progress-bar>
+                <table mat-table [dataSource]="lataSource" matSort>
+
+                    <ng-container *ngFor="let disCol of latas.key; let colIndex = index;" matColumnDef="{{latas.key[colIndex]}}">
+                        <th class="header" mat-header-cell *matHeaderCellDef mat-sort-header floatLabel="never">
+                            {{ latas.name[colIndex]|uppercase }}
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div *ngIf="latas.link[colIndex]  === latas.key[colIndex] ">
+                                <a class="table-link">
+                                    <span class="badge">{{ element[disCol] }}</span>
+                                </a>
+                            </div>
+                            <div *ngIf="latas.link[colIndex]  != latas.key[colIndex] ">
+                                <!-- <span class="badge">{{ element[disCol] }}</span>
+                                <span class="badge">{{ element[disCol] | date:'MM/dd/yyyy hh:mm a' }}</span> -->
+                                <span  *ngIf="latas.key[colIndex]  != 'note_ts'" class="badge">{{ element[disCol] }}</span>
+                                <span  *ngIf="latas.key[colIndex]  == 'note_ts'" class="badge">{{ element[disCol] | date:'MM/dd/yyyy hh:mm a' }}</span>
+
+
+
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="latas.key"></tr>
+                    <tr mat-row *matRowDef="let row; columns: latas.key;"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            </div>
+    
+    
+    
+     

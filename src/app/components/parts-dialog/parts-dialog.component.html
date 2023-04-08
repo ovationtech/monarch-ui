@@ -1,0 +1,165 @@
+
+<div class="form-fields-container" mat-dialog-content >
+  <br>
+<form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Part Number</mat-label>
+    
+    <mat-select formControlName="part_number">
+        <mat-option value="1234">1234</mat-option>
+        <mat-option value="0999-2hy">0999-2hy</mat-option>
+        <mat-option value="0999-432hy">0999-432hy</mat-option>
+        <mat-option value="09sdfdshy">09sdfdshy</mat-option>
+        <mat-option value="099fdgfd32hy">099fdgfd32hy</mat-option>
+        <mat-option value="JHHGF9-432hy">JHHGF9-432hy</mat-option>
+        <mat-option value="0OIUHKFF-432hy">0OIUHKFF-432hy</mat-option>
+        <mat-option value="09JFNKJNFKJ32hy">09JFNKJNFKJ32hy</mat-option>
+        <mat-option value="09788979GHJGH32hy">09788979GHJGH32hy</mat-option>
+        <mat-option value="JHKJH67672hy">JHKJH67672hy</mat-option>
+        <mat-option value="099HHDFKD99782hy">099HHDFKD99782hy</mat-option>
+        <mat-option value="0GHjgjgh&3332hy">0GHjgjgh&3332hy</mat-option>
+        <mat-option value="0999-44323hy">0999-44323hy</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>PART NAME</mat-label>
+      <input matInput formControlName="part_name" >
+      
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>PART TEMP FLAG</mat-label>
+      <input matInput formControlName="part_temp_flag" >
+    
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>PART NOTE</mat-label>
+      <input matInput formControlName="part_note" >
+    
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>PART NAME CHANGED FLAG</mat-label>
+      <input matInput formControlName="part_name_changed_flag" >
+      
+    </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+      <mat-label>PREV PART NAME</mat-label>
+      <input matInput formControlName="prev_part_name" >
+      
+    </mat-form-field>
+
+    <br>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Supplier</mat-label>
+      
+      <mat-select formControlName="supplier">
+          <mat-option value="option1">LMS</mat-option>
+          <mat-option value="option1">Customer</mat-option>
+          <mat-option value="option2">Tech</mat-option>
+      </mat-select>
+      
+    </mat-form-field>
+
+    <mat-checkbox formControlName="recover">Recover</mat-checkbox>
+    <mat-checkbox formControlName="Ready">Order is Ready</mat-checkbox>
+    <mat-checkbox formControlName="Quote">Quote</mat-checkbox>
+    <button style="margin-left: 8px;" mat-raised-button color="accent" mat-dialog-close>Set Ready</button>
+
+    <mat-divider></mat-divider>
+
+    <br>
+    <div mat-dialog-action [align]="'end'">
+      <button style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+      <button  style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Delete Part</button>
+      <button style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Delete Order</button>
+      <button style="margin-left: 8px;" mat-raised-button color="primary" >Add Part</button>
+    </div>
+
+
+
+
+
+    
+<!-- <mat-divider></mat-divider>
+<br>
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>QTY</mat-label>
+  <input matInput formControlName="Qty" >
+ 
+</mat-form-field>
+
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>Part Number</mat-label>
+ 
+  <mat-select formControlName="part_number">
+      <mat-option value="1234">1234</mat-option>
+      <mat-option value="0999-2hy">0999-2hy</mat-option>
+      <mat-option value="0999-432hy">0999-432hy</mat-option>
+      <mat-option value="09sdfdshy">09sdfdshy</mat-option>
+      <mat-option value="099fdgfd32hy">099fdgfd32hy</mat-option>
+      <mat-option value="JHHGF9-432hy">JHHGF9-432hy</mat-option>
+      <mat-option value="0OIUHKFF-432hy">0OIUHKFF-432hy</mat-option>
+      <mat-option value="09JFNKJNFKJ32hy">09JFNKJNFKJ32hy</mat-option>
+      <mat-option value="09788979GHJGH32hy">09788979GHJGH32hy</mat-option>
+      <mat-option value="JHKJH67672hy">JHKJH67672hy</mat-option>
+      <mat-option value="099HHDFKD99782hy">099HHDFKD99782hy</mat-option>
+      <mat-option value="0GHjgjgh&3332hy">0GHjgjgh&3332hy</mat-option>
+      <mat-option value="0999-44323hy">0999-44323hy</mat-option>
+  </mat-select>
+  
+</mat-form-field>
+
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>Description</mat-label>
+  <input matInput formControlName="part_name" >
+
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill" class="example-full-width">
+  <mat-label>Part Note</mat-label>
+  
+  <textarea matInput formControlName="part_note"></textarea>
+
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill" class="full-width">
+  <mat-label>Supplier</mat-label>
+
+  <mat-select formControlName="supplier">
+      <mat-option value="option1">LMS</mat-option>
+      <mat-option value="option1">Customer</mat-option>
+      <mat-option value="option2">Tech</mat-option>
+  </mat-select>
+  
+</mat-form-field>
+
+<mat-checkbox formControlName="recover">Recover</mat-checkbox>
+<mat-checkbox formControlName="Ready">Order is Ready</mat-checkbox>
+<mat-checkbox formControlName="Quote">Quote</mat-checkbox>
+<button style="margin-left: 8px;" mat-raised-button color="accent" mat-dialog-close>Set Ready</button>
+
+<mat-divider></mat-divider>
+
+<br>
+<div mat-dialog-action [align]="'end'">
+  <button style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+  <button  style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Delete Part</button>
+  <button style="margin-left: 8px;" mat-raised-button color="primary" mat-dialog-close>Delete Order</button>
+  <button style="margin-left: 8px;" mat-raised-button color="primary" >Add Part</button>
+</div> -->
+  
+  </form>
+</div>
+
+
+
+
+
+
+
+
+

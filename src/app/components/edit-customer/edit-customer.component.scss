@@ -1,0 +1,30 @@
+.dialog-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 500px;
+}
+
+.options {
+  width: 25%;
+  border-right: 1px solid #ccc;
+}
+
+.option {
+  cursor: pointer;
+}
+
+.option.selected {
+  background-color: #eee;
+}
+
+.option-data {
+  width: 75%;
+  margin-left: 20px;
+}
+
+.table-link {
+  text-decoration: none;
+  color: #6068c0;
+  cursor: pointer;
+}

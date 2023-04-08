@@ -1,0 +1,94 @@
+table {
+    width: 100%;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 0%;
+}
+
+.filter {
+    display: block;
+}
+
+.header {
+    padding: 5px;
+}
+
+.table-link {
+    text-decoration: none;
+    color: #6068c0;
+    cursor: pointer;
+}
+
+
+.cashCard,
+.cashCardContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dashboardCard {
+    border-radius: 10px;
+    height: 10rem;
+}
+
+.cashCardRow h4 {
+    font-size: xx-large;
+    color: #673ab7;
+    font-weight: 600;
+}
+
+.cashCardRow h3,
+span {
+    font-weight: 500;
+}
+
+.cashCardIcon {
+    padding: 16px;
+    background: #673ab7;
+    border-radius: 10px;
+    color: white;
+    height: 20%;
+}
+
+.gridItem {
+    padding: 1rem;
+}
+
+
+.grid {
+    max-width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 48px;
+    color: white;
+  }
+  

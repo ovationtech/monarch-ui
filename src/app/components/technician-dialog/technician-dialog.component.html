@@ -1,0 +1,80 @@
+
+<div class="form-fields-container" mat-dialog-content >
+    <br>
+   <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Business/ Tech Name</mat-label>
+        <input matInput formControlName="business" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>DBA Name</mat-label>
+        <input matInput formControlName="tech_dba_name" >
+        
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Vendor ID</mat-label>
+        <input matInput formControlName="tech_vendor_id" >
+        <mat-error *ngIf="registerform.get('tech_vendor_id')?.hasError('required')">
+          Vendor ID Required
+      </mat-error>
+        
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Technician ID</mat-label>
+        <input matInput formControlName="tech_id" required>
+        <mat-error *ngIf="registerform.get('tech_id')?.hasError('required')">
+          Technician ID is required
+        
+      </mat-error>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Address 1</mat-label>
+        <input matInput formControlName="tech_address_1" >
+      
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Address 2</mat-label>
+        <input matInput formControlName="tech_address_2" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="tech_city" >
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="tech_state" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Zip</mat-label>
+        <input matInput formControlName="tech_zip" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Country</mat-label>
+        <input matInput formControlName="tech_country" >
+    
+      </mat-form-field>
+
+      <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" >Save</button>
+      </div>
+    
+    </form>
+</div>

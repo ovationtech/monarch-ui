@@ -1,0 +1,109 @@
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label >Customer Name</mat-label>
+      <input matInput formControlName="customer_name">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Short Name</mat-label>
+      <input matInput formControlName="short_name">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Contact Name</mat-label>
+      <input matInput formControlName="contact_name">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Mail Address</mat-label>
+      <input matInput formControlName="mail_address">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Mobile Number</mat-label>
+      <input matInput formControlName="mobile_number">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Statement Name</mat-label>
+      <input matInput formControlName="statement_name">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Name Soundex</mat-label>
+      <input matInput formControlName="name_soundex">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Address ID</mat-label>
+      <input matInput formControlName="address_id">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Location Id</mat-label>
+      <input matInput formControlName="location_id" placeholder="Primary Address ID">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Address 1</mat-label>
+      <input matInput  formControlName="address1" placeholder="Address 1" autocomplete="on">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Address 2</mat-label>
+      <input matInput formControlName="address2" placeholder="Address 2">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+      <input matInput formControlName="city" placeholder="City">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Zip</mat-label>
+      <input matInput formControlName="zip" placeholder="Zip">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>State</mat-label>
+      <input matInput formControlName="state" placeholder="State">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+      <input matInput formControlName="country" placeholder="Country">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Contact Name</mat-label>
+      <input matInput formControlName="contactName" placeholder="Contact Name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Contact Phone 1</mat-label>
+      <input matInput formControlName="phone1" placeholder="Contact Phone 1">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Contact Phone 2</mat-label>
+      <input matInput formControlName="phone2" placeholder="Contact Phone 2">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fax</mat-label>
+      <input matInput formControlName="fax" placeholder="Contact Fax">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Term</mat-label>
+      <input matInput formControlName="cntcprsn" placeholder="Term">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Shipping Account Number</mat-label>
+      <input matInput formControlName="shipping_account_number" placeholder="Shipping Account Number">
+      </mat-form-field>
+      <mat-form-field>
+      <mat-label>Sales Rep</mat-label>
+      <mat-select formControlName="salesRep">
+          <mat-option value="option1">option1</mat-option>
+          <mat-option value="option2">option2</mat-option>
+      </mat-select>
+      </mat-form-field>
+      <mat-checkbox formControlName="do_not_use">Do not use location</mat-checkbox>
+      <mat-checkbox formControlName="hold_for_address_1">On hold</mat-checkbox>
+      <mat-checkbox formControlName="isactive">Inactive</mat-checkbox>
+      <mat-checkbox formControlName="receiveEdiCalls">Receive EDI calls</mat-checkbox>
+      <mat-checkbox formControlName="enableEdiUpdates">Enable EDI Updates</mat-checkbox>
+    
+    
+    <button mat-raised-button color="primary" type="submit">Add Customer</button>
+  </form>
+  

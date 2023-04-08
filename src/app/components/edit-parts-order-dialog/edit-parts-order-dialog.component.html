@@ -1,0 +1,106 @@
+<div class="form-fields-container" mat-dialog-content >
+    <br>
+   <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>CALL NUMBER</mat-label>
+        <input matInput formControlName="call_number" required>
+        <mat-error *ngIf="registerform.get('call_number?')?.hasError('required')">
+            call_number is required
+      </mat-error>
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>APPOINTMENT</mat-label>
+        <input matInput formControlName="appointment" required >
+       
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>ORDER NUMBER</mat-label>
+        <input matInput formControlName="order_number" required >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP TO</mat-label>
+        <input matInput formControlName="ship_to" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP TO NAME</mat-label>
+        <input matInput formControlName="ship_to_name" >
+       
+      </mat-form-field>
+      <br>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP ADDRESS 1</mat-label>
+        <input matInput formControlName="ship_address_1" >
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP ADDRESS 2</mat-label>
+        <input matInput formControlName="ship_address_2" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP CITY</mat-label>
+        <input matInput formControlName="ship_city" >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP STATE</mat-label>
+        <input matInput formControlName="ship_state" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP ZIP</mat-label>
+        <input matInput formControlName="ship_zip" >
+        
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>SHIP COUNTRY</mat-label>
+        <input matInput formControlName="ship_country" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>ORDER STATUS</mat-label>
+        <input matInput formControlName="order_status" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>DELIVERED</mat-label>
+        <input matInput formControlName="delivered" >
+        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>ORDER CLOSED</mat-label>
+        <input matInput formControlName="order_closed" >
+        
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>ORDER NOTE</mat-label>
+        <input matInput formControlName="order_note" >
+        
+      </mat-form-field>
+
+      
+
+      <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" >Save</button>
+      </div>
+    
+    </form>
+</div>

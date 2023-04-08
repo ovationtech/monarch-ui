@@ -1,0 +1,29 @@
+<div class="form-fields-container" mat-dialog-content >
+    <br>
+   <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Blob Name</mat-label>
+        <input matInput formControlName="blob_name" required>
+        <mat-error *ngIf="registerform.get('record_number?')?.hasError('required')">
+          blob_name is required
+      </mat-error>
+        
+      </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width" aria-setsize="50">
+        <mat-label>Blob Value</mat-label>
+        <input matInput formControlName="blob_value" required>
+       
+      </mat-form-field>
+
+    
+    
+      <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" >Save</button>
+      </div>
+    
+    </form>
+</div>
+
